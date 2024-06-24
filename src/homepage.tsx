@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { circuits_list } from "./circuits_list";
+import { useNavigate } from "react-router-dom";
 
 // https://stackoverflow.com/questions/5927284/how-can-i-make-setinterval-also-work-when-a-tab-is-inactive-in-chrome
 class WorkerInterval {
@@ -21,6 +22,7 @@ export default function Homepage() {
   const [current_circuit_title, set_current_circuit_title] = useState<String>(circuits_list[0].name);
   const [current_circuit_path, set_current_circuit_path] = useState(circuits_list[0].path);
   const title_first_render = useRef(true);
+  const navigate = useNavigate();
 
   // remove title's characters
   useEffect(() => {
@@ -149,6 +151,7 @@ export default function Homepage() {
               absolute h-3/5 w-5/6 border-2 border-black font-description text-3xl tracking-wider hover:-translate-x-1 hover:-translate-y-1 ease-in-out duration-100 
               hover:bg-black hover:text-white 
               hover:after:absolute hover:after:h-[110%] hover:after:w-[105%] hover:after:top-0 hover:after:left-0"
+            onClick={() => navigate("/selection")}
           >
             Start
           </button>
@@ -172,7 +175,7 @@ export default function Homepage() {
           {current_circuit_title}
         </div>
         {/* https://stackoverflow.com/questions/34582405/react-wont-load-local-images */}
-        <img id="illustration" src={require(`./assets/images/circuits/${current_circuit_path}.avif`)} alt="Formula 1 circuit" />
+        <img id="illustration" src={require(`./assets/images/circuits_layout/${current_circuit_path}.avif`)} alt="Formula 1 circuit" />
       </div>
       {/* <div id="footer-container" className="row-start-10 row-end-11 col-start-1 col-end-11 bg-pink-200"></div> */}
     </div>
